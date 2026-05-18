@@ -38,7 +38,7 @@ public class EnergyScript : MonoBehaviour
         if (time >= 1f)
         {
             MaxEnergy -= 1;
-            MaxEnergy = Mathf.Clamp(MaxEnergy, 0, 100); // защита от минуса
+            MaxEnergy = Mathf.Clamp(MaxEnergy, 0, 100);
 
             UpdateSprite();
 
@@ -63,5 +63,23 @@ public class EnergyScript : MonoBehaviour
         else if (MaxEnergy >= 19f) img.sprite = s19;
         else if (MaxEnergy >= 11f) img.sprite = s11;
         else img.sprite = s0;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Buff")
+        {
+            if (collision.name == "BatteryCharge50%")
+            {
+                MaxEnergy += 40f;
+            }
+            else if (collision.name == "LightingCharge100%")
+            {
+                MaxEnergy += 70f;
+            }
+
+            MaxEnergy = Mathf.Clamp(MaxEnergy, 0, 100);
+            UpdateSprite();
+        }
     }
 }

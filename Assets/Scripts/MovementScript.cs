@@ -6,6 +6,8 @@ public class MovementScript : MonoBehaviour
     public Vector2 moveVector;
     public float speed;
     public float jumpForce;
+    public Transform Player;
+    private float playerY; 
 
     void Start()
     {
@@ -14,8 +16,14 @@ public class MovementScript : MonoBehaviour
 
     void Update()
     {
+        playerY = Player.position.y;
+        
         Walk();
         Jump();
+        if (playerY <= -6)
+        {
+            Dead();
+        }
     }
 
     void Walk()
@@ -30,5 +38,10 @@ public class MovementScript : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x , jumpForce);
         }
+    }
+
+    void Dead()
+    {
+        Destroy(gameObject);
     }
 }
