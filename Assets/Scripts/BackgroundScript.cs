@@ -3,6 +3,7 @@ using UnityEngine;
 public class BackgroundMove : MonoBehaviour
 {
     public Transform Camera;
+    public int q;
 
     void LateUpdate()
     {
